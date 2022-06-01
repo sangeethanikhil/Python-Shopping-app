@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="section padding_layout_1 Shopping_cart_section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <div class="product-table">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Tracking Details</th>
+                <th>Date</th>
+		<th>Time</th>
+                
+
+                <th> </th>
+              </tr>
+            </thead>
+            <tbody>	
+		{% for v in data %}
+              <tr>
+		 <td>{{v.trackingdetails}}
+                </td>
+		 
+		
+		<td> {{v.date}}
+                    </td>
+		<td>{{v.time}}
+                </td>
+		
+		
+		
+              </tr>
+             
+		{% endfor %}
+            </tbody>
+          </table>
+</div>
+</div>
+</div>
+</div>
+</div>
+	
+{% endblock %}

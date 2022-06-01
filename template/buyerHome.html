@@ -1,0 +1,27 @@
+<html>
+	<body>
+		<ul>
+			<li><a href="{% url 'viewproducts' %}">View Product</a></li>
+			<li><a href="{% url 'viewcart'  %}">view Cart</a></li>
+			<li><a href="{% url 'vieworders'  %}">view Orders</a></li>
+			<li><a href="{% url 'searchbyprice'  %}">Search By Price</a></li>
+			<li><a href="{% url 'viewprofile'  %}">View Profile</a></li>
+			<li><a href="{% url 'logout' %}">Logout</a></li>
+			<form method="post" action="{% url 'productSearch' %}">
+			{% csrf_token %}
+			<table>
+			<tr>
+				<td>Product Name</td>
+				<td><input type="text" name="name"/></td>
+				<td><input type="submit" value="search"/></td>
+			</tr>
+			</table>
+			</form>
+		
+				
+			
+			
+			
+		</ul>
+	</body>
+</html>

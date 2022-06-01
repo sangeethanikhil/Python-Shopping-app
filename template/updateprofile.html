@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% block content %}
+<script type="text/javascript">
+		function validation()
+		{
+			var alpha=/^[a-zA-Z]+$/;
+			var num=/^[0-9]+$/;
+			
+			
+			
+			var name=document.getElementById("name");
+			var gender=document.getElementById("gender");
+			var address=document.getElementById("address");
+			var country=document.getElementById("country");
+			var phone=document.getElementById("phone");
+			var username=document.getElementById("username");
+			var password=document.getElementById("password");
+			var m=document.profile.gender;
+			if(name.value.length==0)
+			{
+				alert("Please Enter your name ");
+				return false;
+			}
+			else if(!name.value.match(alpha))
+			{
+				alert("invalid name");
+				name.focus();
+				return false;
+			}
+		//varbl=	m[0].checked;
+		else if(m[0].checked==false && m[1].checked==false)
+		{
+			alert("Please Enter your gender ");
+			return false;
+		}
+//			if(m[0].checked==false && m[1].checked==false)
+//			{
+//			alert("Please Enter your gender ");
+//				return false;
+//			}
+			
+			
+			
+			else if(address.value.length==0)
+			{
+				alert("address field cannot be null");
+				return false;
+			}
+			else if(country.value.length==0)
+			{
+				alert("Please select your country ");
+				return false;
+			}
+			
+		
+			else if(phone.value.length==0)
+			{
+				alert("Mobile field cannot be null");
+				phone.focus();
+				return false;
+			}
+			
+			else if(!phone.value.match(num))
+			{
+				alert("invalid mobile number");
+				phone.focus();
+				return false;
+			}
+			else if(username.value.length==0)
+			{
+				alert("Username field cannot be null");
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}	
+			
+		
+	</script>
+	<div class="section padding_layout_1">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+          <div class="full">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="main_heading text_align_center">
+                <h2>Update</h2>
+              </div>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 appointment_form">
+              <div class="form_section">
+                <form class="form_contant" method="post" action="{% url 'profileAction' %}">
+		{% csrf_token %}
+		{% for v in data %}
+                  <fieldset class="row">
+                  <div class="field col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		 <div class="row">  
+                  <div style="margin-top:15px;width:10%">Name</div><input class="field_custom"  type="text" name="name" id="name" value="{{v.name}}" ></div>
+                  </div>
+            
+                  <div class="field col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		      <div class="row">
+		     <div style="margin-top:15px;width:10%">Gender</div>
+			<div class="divgender">
+				<div style="margin-top:10px">
+		    {% ifequal v.gender 'male' %}
+				<input type="radio" name"gender" value="male" checked="true" id="gender"/>male
+				<input type="radio" name="gender" value="female" id="gender"/>female
+				{% else %}
+				<input type="radio" name="gender" value="male" id="gender"/>male
+				<input type="radio" name="gender" value="female" checked="true" id="gender"/>female
+				{% endifequal %}
+				</div>
+				</div>
+			</div>
+                  </div>
+		  <div class="field col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		  <div class="row">
+		    <div style="margin-top:15px;width:10%">Address</div>
+			    <textarea class="field_custom" name="address" rows="4" cols="12" id="address">{{v.address}}></textarea>
+                  </div>
+		  <div class="field col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		  <div class="row">
+                    <div style="margin-top:15px;width:10%">Country</div><select class="field_custom" name="country" id="country">
+						<option value="{{v.country}}">{{v.country}}</option>
+						<option value="India">India</option>
+						<option value="China">China</option>
+						<option value="Japan">Japan</option>></div>
+						</select>
+                  </div>
+		  
+		   <div class="field col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		 <div class="row">  
+                  <div style="margin-top:15px;width:10%">Phone</div><input class="field_custom"  type="text" name="phone" value="{{v.phone}}" id="phone"></div>
+                  </div>
+		   <div class="field col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		   <div class="row">
+                    <div style="margin-top:15px;width:10%">Username</div>
+				<input class="field_custom"  type="text" name="username" value="{{v.username}}" id="username"/</div>
+                  </div>
+			
+		  {% endfor %}
+                  
+                  <div class="center">
+                    <button class="btn main_bt" type="submit"  value="Update" onclick="return validation()">UPDATE</button>
+                  </div>
+		
+                  
+                  </fieldset>
+		
+                </form>
+		
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+	
+			{% if msg %}
+				<script>
+					alert('{{msg}}');
+				</script>
+			{% endif %}
+		
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block content %}
+<script type="text/javascript">
+		function validation()
+		{
+	
+			var num=/^[0-9]+$/;
+			
+			
+			
+			var category=document.getElementById("category");
+			var price=document.getElementById("price");
+			if(category.value.length==0)
+			{
+				alert("Please select a category ");
+				return false;
+			}
+			else if(price.value.length==0)
+			{
+				alert("price field cannot be null");
+				price.focus();
+				return false;
+			}
+			
+			else if(!price.value.match(num))
+			{
+				alert("invalid mobile number");
+				price.focus();
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}	
+			
+		
+	</script>
+<div class="section padding_layout_1">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+          <div class="full">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="main_heading text_align_center">
+                <h2></h2>
+              </div>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 appointment_form">
+              <div class="form_section">
+                <form class="form_contant" method="post" action="{% url 'priceAction' %}">
+		{% csrf_token %}
+                  <fieldset class="row">
+                  <div class="field col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		 <div class="row">  
+                  <div style="margin-top:15px;width:10%">Category</div><select name="category" id="category">
+				<option value="">--select--</option>
+				{% for v in data %}
+					<option value="{{v.id}}">{{v.add}}
+					</option>
+				{% endfor %}
+				</select>></div>
+                  </div>
+                  
+		  <div class="field col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		  <div class="row">
+                    <div style="margin-top:15px;width:10%">Price</div><input class="field_custom" input type="text" name="price" id="price"></div>
+                  </div>
+		  
+		  
+                  
+                  <div class="center">
+                    <button class="btn main_bt" type="submit" value="search" onclick="return validation()">Search</button>
+                  </div>
+		
+                  
+                  </fieldset>
+		
+                </form>
+		
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+	
+{% endblock %}

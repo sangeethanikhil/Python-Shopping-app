@@ -1,0 +1,73 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="section padding_layout_1 Shopping_cart_section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <div class="product-table">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Image</th>
+           
+		<th>Details</th>
+		<th>Stock</th>
+                <th>Shipping Address</th>
+		<th>Contact Number</th>
+               <th>Quantity</th>
+		<th>Price</th>
+		 <th>Date</th>
+		<th>Status</th>
+
+                <th> </th>
+              </tr>
+            </thead>
+            <tbody>	
+		{% for v in data %}
+              <tr>
+		<td> <img class="media-object img-product" src="{{v.product_id.image.url}}" height="100px" width="100px alt="no pic">
+                    </td>
+		<td>{{v.product_id.details}}</td>
+		
+               <td>{{v.product_id.stock}}
+                </td>
+		 <td>{{v.address}}
+                </td>
+		<td>{{v.number}}
+                </td>
+		<td>{{v.quantity}}
+                </td>
+		<td>{{v.price}}
+                </td>
+		 <td>{{v.date}}
+   
+                </td>
+		<td>{{v.status}}
+                </td>
+		<td>
+		{% if v.status == 'cancelled' %}
+				<td class="col-sm-1 col-md-1" style="text-align: center"><a href="{% url 'verifycancel' v.id %}">Verify cancel</a></td>
+				{% elif v.status == 'cancelverified' %}
+				<td class="col-sm-1 col-md-1" style="text-align: center"></td>
+				{% elif v.status == 'approved' %}
+				<td class="col-sm-1 col-md-1" style="text-align: center"><a href="{% url 'addtrackingdetails' v.id %}">Add Tracking Details</a></td>
+				{% elif v.status == 'delivered' %}
+				<td class="col-sm-1 col-md-1" style="text-align: center"></td>
+				{% else %}
+				<td class="col-sm-1 col-md-1" style="text-align: center"<a href="{% url 'approves' v.id %}">Approve</a></td>
+				<td class="col-sm-1 col-md-1" style="text-align: center"><a href="{% url 'rejects' v.id %}">Reject</a></td>
+				{% endif %}
+		</tr>
+		
+             
+		{% endfor %}
+            </tbody>
+          </table>
+</div>
+</div>
+</div>
+</div>
+</div>
+	
+{% endblock %}

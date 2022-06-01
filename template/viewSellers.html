@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="section padding_layout_1 Shopping_cart_section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <div class="product-table">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Gender</th>
+		<th>Address</th>
+                <th>Country</th>
+		<th>Phone</th>
+                <th>Username</th>
+		<th>Status</th>
+
+                <th> </th>
+              </tr>
+            </thead>
+            <tbody>	
+		{% for v in data %}
+              <tr>
+		<td> {{v.name}}
+                    </td>
+		<td>{{v.gender}}</td>
+		
+               <td>{{v.address}}
+                </td>
+		 <td>{{v.country}}
+                </td>
+		<td>{{v.phone}}
+                </td>
+		<td>{{v.username}}
+                </td>
+		<td>{{v.status}}
+                </td>
+		 <td><a href="{% url 'approve' v.id %}">Approve</a>
+                </td>
+   
+                </td>
+		<td><a href="{% url 'reject' v.id %}">Reject</a>
+                </td>
+		
+		
+              </tr>
+             
+		{% endfor %}
+            </tbody>
+          </table>
+</div>
+</div>
+</div>
+</div>
+</div>	
+	
+	
+{% endblock %}

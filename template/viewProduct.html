@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="section padding_layout_1 Shopping_cart_section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <div class="product-table">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+		<th>Category</th>
+                <th>Details</th>
+		<th>Stock</th>
+		<th>Price</th>
+		
+
+                <th> </th>
+              </tr>
+            </thead>
+            <tbody>	
+		{% for v in data %}
+              <tr>
+		<td> <img class="media-object img-product" src="{{v.image.url}}" height="100px" width="100px" alt="no pic">
+                    </td>
+		<td>{{v.name}}</td>
+		
+               <td>{{v.category_id.add}}
+                </td>
+		 <td>{{v.details}}
+                </td>
+		<td>{{v.stock}}
+                </td>
+		<td>{{v.price}}
+                </td>
+		<td><a href="{%  url 'updateProduct' v.id %}">Update</a>
+                </td>
+		<td><a href="{%  url 'deleteProduct' v.id %}">Delete</a>
+                </td>
+		
+		
+              </tr>
+             
+              
+             
+		{% endfor %}
+            </tbody>
+          </table>	
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
